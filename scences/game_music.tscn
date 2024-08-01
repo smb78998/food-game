@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpo7re4wweow"]
+
+[ext_resource type="AudioStream" uid="uid://6wbtpkmojbem" path="res://assets/music/Cute Background Music No Copyright ⧸ Cute Copyright Free Music-(p).mp3" id="1_0dgjm"]
+
+[node name="GameMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_0dgjm")
+autoplay = true
+bus = &"Music"

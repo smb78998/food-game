@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://88a7me5ejmr6"]
+
+[ext_resource type="Texture2D" uid="uid://4h0nkqnh1dhe" path="res://assets/sprites/ShopBG_320x180px.png" id="1_dd4v4"]
+[ext_resource type="Script" path="res://scripts/GameManger.gd" id="1_rgjhn"]
+[ext_resource type="PackedScene" uid="uid://bcamcqiiphi2u" path="res://scences/player.tscn" id="2_4dbny"]
+[ext_resource type="AudioStream" uid="uid://cjkkmtlp1m12d" path="res://assets/sounds/coin.wav" id="3_3s6s8"]
+[ext_resource type="Texture2D" uid="uid://bkmweema1uvnh" path="res://assets/sprites/scoreIcon.png" id="5_70q63"]
+[ext_resource type="PackedScene" uid="uid://cvc11o7ec0ha6" path="res://scences/food_1.tscn" id="6_abj5n"]
+[ext_resource type="FontFile" uid="uid://ik05lbf5hqt5" path="res://assets/fonts/PixelOperator8.ttf" id="6_ahbdo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v7qfr"]
+bg_color = Color(0.848022, 0.819056, 0.858819, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qqxd0"]
+bg_color = Color(0.920521, 0.422784, 0.408658, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axh0a"]
+size = Vector2(324, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pxe2"]
+size = Vector2(18, 186)
+
+[node name="level1" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_rgjhn")
+
+[node name="Timer" type="Timer" parent="GameManager"]
+
+[node name="ProgressBar" type="ProgressBar" parent="GameManager/Timer"]
+offset_left = -133.0
+offset_top = -46.0
+offset_right = -51.0
+offset_bottom = -35.0
+rotation = -1.56124
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_v7qfr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qqxd0")
+max_value = 20.0
+value = 5.0
+show_percentage = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameManager"]
+stream = ExtResource("3_3s6s8")
+bus = &"Food"
+
+[node name="ScoreLabel" type="Label" parent="GameManager"]
+offset_left = -132.889
+offset_top = -152.769
+offset_right = -112.889
+offset_bottom = -144.769
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ahbdo")
+theme_override_font_sizes/font_size = 8
+text = " X"
+
+[node name="spawnerTimer" type="Timer" parent="GameManager"]
+wait_time = 1.001
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15, -88)
+texture = ExtResource("1_dd4v4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -80)
+zoom = Vector2(4, 4)
+
+[node name="Floor Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor Collisions"]
+position = Vector2(1, 10)
+shape = SubResource("RectangleShape2D_axh0a")
+
+[node name="boundaries" type="Node" parent="."]
+
+[node name="Right Boundary" type="StaticBody2D" parent="boundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boundaries/Right Boundary"]
+position = Vector2(152, -88)
+shape = SubResource("RectangleShape2D_0pxe2")
+
+[node name="Left Boundary" type="StaticBody2D" parent="boundaries"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="boundaries/Left Boundary"]
+position = Vector2(-152, -88)
+shape = SubResource("RectangleShape2D_0pxe2")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_4dbny")]
+position = Vector2(0, -8)
+
+[node name="ScoreIcon" type="Sprite2D" parent="."]
+position = Vector2(-124, -147)
+scale = Vector2(0.592592, 0.961538)
+texture = ExtResource("5_70q63")
+
+[node name="Food1" parent="." instance=ExtResource("6_abj5n")]
+position = Vector2(-179, -79)

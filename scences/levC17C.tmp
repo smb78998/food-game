@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://88a7me5ejmr6"]
+
+[ext_resource type="Texture2D" uid="uid://4h0nkqnh1dhe" path="res://assets/sprites/ShopBG_320x180px.png" id="1_dd4v4"]
+[ext_resource type="Script" path="res://scripts/GameManger.gd" id="1_rgjhn"]
+[ext_resource type="PackedScene" uid="uid://bcamcqiiphi2u" path="res://scences/player.tscn" id="2_4dbny"]
+[ext_resource type="Texture2D" uid="uid://bkmweema1uvnh" path="res://assets/sprites/scoreIcon.png" id="5_70q63"]
+[ext_resource type="FontFile" uid="uid://ik05lbf5hqt5" path="res://assets/fonts/PixelOperator8.ttf" id="6_ahbdo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_axh0a"]
+size = Vector2(324, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pxe2"]
+size = Vector2(18, 186)
+
+[node name="level1" type="Node2D"]
+
+[node name="GameManger" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_rgjhn")
+
+[node name="ScoreLabel" type="Label" parent="GameManger"]
+offset_left = -132.889
+offset_top = -152.769
+offset_right = -112.889
+offset_bottom = -144.769
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_ahbdo")
+theme_override_font_sizes/font_size = 8
+text = " X"
+
+[node name="Timer" type="Timer" parent="GameManger"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(15, -88)
+texture = ExtResource("1_dd4v4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -80)
+zoom = Vector2(4, 4)
+
+[node name="Floor Collisions" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor Collisions"]
+position = Vector2(1, 10)
+shape = SubResource("RectangleShape2D_axh0a")
+
+[node name="boundaries" type="Node" parent="."]
+
+[node name="Right Boundary" type="StaticBody2D" parent="boundaries"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boundaries/Right Boundary"]
+position = Vector2(152, -88)
+shape = SubResource("RectangleShape2D_0pxe2")
+
+[node name="Left Boundary" type="StaticBody2D" parent="boundaries"]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="boundaries/Left Boundary"]
+position = Vector2(-152, -88)
+shape = SubResource("RectangleShape2D_0pxe2")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_4dbny")]
+position = Vector2(0, -8)
+
+[node name="ScoreIcon" type="Sprite2D" parent="."]
+position = Vector2(-124, -147)
+scale = Vector2(0.592592, 0.961538)
+texture = ExtResource("5_70q63")

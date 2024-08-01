@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvc11o7ec0ha6"]
+
+[ext_resource type="Script" path="res://scripts/food_1.gd" id="1_a6nc8"]
+[ext_resource type="Texture2D" uid="uid://h4erch71knu2" path="res://assets/sprites/Food.png" id="1_uvhxf"]
+[ext_resource type="AudioStream" uid="uid://cjkkmtlp1m12d" path="res://assets/sounds/coin.wav" id="3_7hqbx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mq2k"]
+atlas = ExtResource("1_uvhxf")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rqsb1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mq2k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8lcf"]
+size = Vector2(19.5065, 10.0248)
+
+[node name="Food1" type="Area2D"]
+script = ExtResource("1_a6nc8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rqsb1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -1.19209e-07)
+rotation = 0.673222
+shape = SubResource("RectangleShape2D_k8lcf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7hqbx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
