@@ -10,7 +10,7 @@ This is a small side project I've been just playing around Godot and hope to mak
 - [Author](#author)
 
 ## Screenshot
-<img src="Screenshot%202024-05-26%20222222.png" href="Screenshot%202024-05-26%20222222.png" width="400">
+<img src="food-game-screenshot.png" href="food-game-screenshot.png" width="400">
 
 ## Built with
 
